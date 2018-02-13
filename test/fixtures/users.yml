@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  lbg: MyString
+  year_started: 2018-02-13 21:32:44
+  year_ended: 2018-02-13 21:32:44
+  diet: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  lbg: MyString
+  year_started: 2018-02-13 21:32:44
+  year_ended: 2018-02-13 21:32:44
+  diet: MyString
