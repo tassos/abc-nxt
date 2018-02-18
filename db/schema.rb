@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213193709) do
+ActiveRecord::Schema.define(version: 20180218132546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,10 +46,19 @@ ActiveRecord::Schema.define(version: 20180213193709) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "answers", force: :cascade do |t|
+    t.text "content"
+    t.bigint "question_id"
+    t.bigint "application_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_answers_on_application_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
+
   create_table "applications", force: :cascade do |t|
     t.integer "event_id"
     t.integer "user_id"
-    t.jsonb "answers"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,6 +70,16 @@ ActiveRecord::Schema.define(version: 20180213193709) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "event_id"
+    t.text "name"
+    t.integer "order"
+    t.integer "kind"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_questions_on_event_id"
   end
 
   create_table "users", force: :cascade do |t|

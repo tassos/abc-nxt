@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   resources :users
   resources :applications
 
-  root to: "events#index"
+  root to: "admin/events#index"
 end
