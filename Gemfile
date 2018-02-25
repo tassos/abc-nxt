@@ -37,6 +37,8 @@ gem 'rails-erd'
 gem 'formtastic-bootstrap'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
+# Randomizing the ids of the user instances
+gem 'pg_random_id'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

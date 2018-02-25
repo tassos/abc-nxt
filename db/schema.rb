@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218132546) do
+ActiveRecord::Schema.define(version: 20180225133947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,25 +46,25 @@ ActiveRecord::Schema.define(version: 20180218132546) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "answers", force: :cascade do |t|
+  create_table "answers", id: :string, limit: 6, default: -> { "pri_nextval_str('answers_id_seq'::regclass)" }, force: :cascade do |t|
     t.text "content"
-    t.bigint "question_id"
-    t.bigint "application_id"
+    t.string "question_id"
+    t.string "application_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_answers_on_application_id"
     t.index ["question_id"], name: "index_answers_on_question_id"
   end
 
-  create_table "applications", force: :cascade do |t|
-    t.integer "event_id"
-    t.integer "user_id"
+  create_table "applications", id: :string, limit: 6, default: -> { "pri_nextval_str('applications_id_seq'::regclass)" }, force: :cascade do |t|
+    t.string "event_id"
+    t.string "user_id"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", id: :string, limit: 6, default: -> { "pri_nextval_str('events_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "name"
     t.datetime "start_date"
     t.datetime "end_date"
@@ -72,8 +72,11 @@ ActiveRecord::Schema.define(version: 20180218132546) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "questions", force: :cascade do |t|
-    t.bigint "event_id"
+# Could not dump table "pri_keys" because of following StandardError
+#   Unknown type 'regclass' for column 'sequence'
+
+  create_table "questions", id: :string, limit: 6, default: -> { "pri_nextval_str('questions_id_seq'::regclass)" }, force: :cascade do |t|
+    t.string "event_id"
     t.text "name"
     t.integer "order"
     t.integer "kind"
@@ -82,7 +85,7 @@ ActiveRecord::Schema.define(version: 20180218132546) do
     t.index ["event_id"], name: "index_questions_on_event_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :string, limit: 6, default: -> { "pri_nextval_str('users_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"
