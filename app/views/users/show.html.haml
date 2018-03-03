@@ -1,0 +1,40 @@
+%h2= 'Hello ' + @user.first_name
+Here are your personal information
+
+%table
+  %tr
+    %th First Name
+    %td= @user.first_name
+  %tr
+    %th Last Name
+    %td= @user.last_name
+  %tr
+    %th LBG
+    %td= @user.lbg
+  %tr
+    %th Year started in BEST
+    %td= @user.year_started
+  %tr
+    %th Year stopped beding active in BEST
+    %td= @user.year_ended
+  %tr
+    %th Dietary preferences
+    %td= @user.diet
+
+- unless @applications.empty?
+  %h2 Your past applications
+  %table
+    %tr
+      %td Event
+      %td Application
+    = @applications.each do |app|
+      %tr
+        %td= app.event.name
+        %td= app.id
+
+= button_to 'Edit', edit_user_path(@user), method: :get, class: 'btn btn-default'
+
+%h2 Apply for an event
+= form_tag application_path do
+  = select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name)
+  = submit_tag 'Apply', class: 'btn btn-primary'
