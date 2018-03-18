@@ -21,6 +21,10 @@ test:
   <<: *default
   database: abc-app-test
 
+staging:
+  <<: *default
+  database: abc-app-staging
+
 production:
   <<: *default
   database: abc-app-production
