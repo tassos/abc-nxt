@@ -1,4 +1,4 @@
-%h2= 'Hello ' + @user.first_name
+%h2= 'Hello ' + @user.try(:first_name)
 Here are your personal information
 
 %table
