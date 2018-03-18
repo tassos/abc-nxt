@@ -11,10 +11,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    unless User.find_by(email: user_params[:email])
+    @user = User.find_by(email: user_params[:email])
+    unless @user
       @user = User.create(user_params)
     end
 
+    UserMailer.welcome_email(@user).deliver_now
     redirect_to root_path
   end
 
