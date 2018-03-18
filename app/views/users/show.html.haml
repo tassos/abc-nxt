@@ -24,20 +24,23 @@ Here are your personal information
     %th Dietary preferences
     %td= @user.diet
 
+= button_to 'Edit', edit_user_path(@user), method: :get, class: 'btn btn-default'
+
 - unless @applications.empty?
   %h2 Your past applications
   %table
     %tr
-      %td Event
-      %td Application
-    = @applications.each do |app|
+      %th Event
+      %th Application
+      %th
+    - @applications.each do |app|
       %tr
         %td= app.event.name
         %td= app.id
-
-= button_to 'Edit', edit_user_path(@user), method: :get, class: 'btn btn-default'
+        %th= link_to 'Edit', edit_application_path(app.id)
 
 %h2 Apply for an event
 = form_tag new_application_path, method: :get do
   = select_tag :event_id, options_from_collection_for_select(Event.all, :id, :name)
+  = hidden_field_tag :user_id, @user.id
   = submit_tag 'Apply', class: 'btn btn-primary'

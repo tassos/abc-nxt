@@ -1,0 +1,12 @@
+= semantic_form_for @application do |f|
+  = hidden_field_tag :event_id, params[:event_id]
+  = hidden_field_tag :user_id, params[:user_id]
+
+  - @questions.each do |question|
+    .row
+      .form-group
+        = label_tag question.name, nil, class: 'col-md-2'
+        .col-md-10
+          %input{name: "answers[#{question.id}]", type: question.kind, class: 'form-control'}
+
+  %input{type: 'submit'}
