@@ -1,9 +1,17 @@
 class UsersController < ApplicationController
+
   protect_from_forgery with: :exception
   before_action :set_user, only: [:show, :edit, :update]
 
+  def index
+    @users_grid = UsersGrid.new(params[:users_grid]) do |scope|
+      scope.page(params[:page])
+    end
+  end
+
   def show
     @applications = @user.applications
+    @available_events = Event.open
   end
 
   def new
@@ -38,5 +46,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :first_name, :last_name, :lbg, :diet, :year_started, :year_ended)
+  end
+
+  def grid_params
+    params.fetch(:users_grid, {}).permit!
   end
 end
