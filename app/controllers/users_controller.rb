@@ -12,6 +12,11 @@ class UsersController < ApplicationController
   def show
     @applications = @user.applications
     @available_events = Event.open
+
+    unless @user.completed?
+      flash[:notice] = "Please complete your profile before applying to an event!"
+      redirect_to edit_user_path(@user)
+    end
   end
 
   def new

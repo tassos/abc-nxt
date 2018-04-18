@@ -1,4 +1,4 @@
-%h2= 'Hello ' + @user.try(:first_name)
+%h2= 'Hello ' + @user.first_name.to_s
 Here are your personal information
 
 %table
