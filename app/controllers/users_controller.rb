@@ -30,6 +30,7 @@ class UsersController < ApplicationController
     end
 
     UserMailer.welcome_email(@user).deliver_now
+    flash[:notice] = "Follow this link to create an application #{user_url(@user)}"
     redirect_to root_path
   end
 
